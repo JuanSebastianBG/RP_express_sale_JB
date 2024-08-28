@@ -1,3 +1,6 @@
+
+<!-- index.login.php -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,9 +9,9 @@
     <title>Login</title>
 </head>
 <body>
-    <form action="login.php" method="post">
+    <form action="controlador/procesos.php" method="post">
         <input name="usuario_alias" type="text" placeholder="Usuario Alias">
-        <input name="usuario_contraseña" type="pass" placeholder="Contraseña">
+        <input name="usuario_contra" type="pass" placeholder="Contraseña">
         <input type="submit">
     </form>
 </body>
