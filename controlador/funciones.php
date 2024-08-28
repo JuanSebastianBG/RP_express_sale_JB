@@ -26,6 +26,7 @@
         require 'conexion.php';
 
         if (isset($usuario_id)) {
+            
             $consulta_session = $conn->prepare("SELECT * FROM usuarios WHERE usuario_id = :usuario_id ;");
             $consulta_session->bindValue(':usuario_id', $usuario_id, PDO::PARAM_INT);
             $consulta_session->execute();
@@ -38,6 +39,11 @@
         }
     }
 
+    function registrar_producto($producto_nombre, $producto_descripcion, $producto_cantidad, $producto_precio, $producto_imagen_url, $usuario_id, $categoria_id){
+        
 
+        $sql = "INSERT INTO productos(producto_nombre, producto_descripcion, producto_cantidad, producto_precio, producto_imagen_url, usuario_id, categoria_id) 
+        VALUES (':producto_nombre',':producto_descripcion',':producto_cantidad',':producto_precio',':producto_imagen_url','usuario_id','categoria_id')";
+    }
 
 ?>
