@@ -6,7 +6,6 @@ require 'funciones.php';
 $usuario = null;
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
- var_dump($_FILES);
     if(isset($_POST['formulario'])){
         $formulario = $_POST['formulario'];
 
@@ -22,7 +21,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 $usuario = getInfo($usuario_id);
                 if($usuario){
                     $_SESSION['usuario'] = $usuario;
-                    header('Location: ../index.registro_productos.php');
+                    header('Location: ../index.PaginaPrincipal.php');
                     exit;
                 }else{
                     echo "<script type='text/javascript'>

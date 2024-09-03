@@ -58,7 +58,7 @@
     
     
         $direccion = "../imagenes/";
-        $ruta = $direccion.basename($_FILES['file']['name']);
+        $ruta = $direccion.basename($file['name']);
     
         if($_FILES['file']['size']>0){
             if(move_uploaded_file($_FILES['file']['tmp_name'], $ruta)){
@@ -129,5 +129,15 @@
 
         return false;
 
+    }
+
+    function obtenerProductosPP(){
+        require 'conexion.php';
+
+        $sql = "SELECT * FROM productos";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
     }
 ?>
