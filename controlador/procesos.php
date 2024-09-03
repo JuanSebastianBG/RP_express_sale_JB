@@ -82,6 +82,26 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                         window.location.href = '../index.registro_productos.php';
                     </script>";
             }
+        }elseif($formulario == 'registrarUsuario'){
+            $nombre = $_POST['nombre'];
+            $apellidos = $_POST['apellidos'];
+            $email = $_POST['email'];
+            $telefono = $_POST['telefono'];
+            $alias = $_POST['alias'];
+            $pass = $_POST['pass'];
+            $direccion = $_POST['direccion'];
+
+            $registroUsuario = registrarUsuario($nombre, $apellidos, $email, $telefono, $alias, $pass, $direccion);
+
+            if($registroUsuario){
+                header('Location: ../index.login.php');
+                return true;
+            }
+            return null;
+
+
+
+
         }else{
             echo "Error en el formulario";
         }

@@ -37,7 +37,7 @@ $productos = obtenerProductosPP();
                 </li>
                 <?php if (isset($_SESSION['usuario'])): ?>
                     <?php if ($_SESSION['usuario']['rol_id'] == 4): ?>
-                        <li><a href="crud.php" class="btn btn-outline btn-sm">Admin</a></li>
+                        <li><a href="index.registro_productos.php" class="btn btn-outline btn-sm">Admin</a></li>
                     <?php elseif ($_SESSION['usuario']['rol_id'] == 3): ?>
                         <li><a href="domiciliario.php" class="btn btn-outline btn-sm">Domiciliario</a></li>
                     <?php elseif ($_SESSION['usuario']['rol_id'] == 2): ?>

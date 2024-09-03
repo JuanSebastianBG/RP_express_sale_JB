@@ -140,4 +140,28 @@
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
+
+    function registrarUsuario($nombre, $apellidos, $email, $telefono, $alias, $pass, $direccion){
+
+        require 'conexion.php';
+
+        $sql = 'INSERT INTO usuarios( usuario_nombre, usuario_apellido, usuario_correo, usuario_alias, usuario_telefono, usuario_direccion, usuario_contra) VALUES (:nombre,:apellidos,:email,:alias,:telefono,:direccion,:pass)';
+        $stmt = $conn->prepare($sql);
+
+        $stmt->bindValue(':nombre', $nombre);
+        $stmt->bindValue(':apellidos', $apellidos);
+        $stmt->bindValue(':email', $email);
+        $stmt->bindValue(':alias', $alias);
+        $stmt->bindValue(':telefono', $telefono);
+        $stmt->bindValue(':direccion', $direccion);
+        $stmt->bindValue(':pass', md5($pass));
+        $stmt->execute();
+
+        $registro = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        if($registro){
+            return true;
+        }
+        return null;
+    }
 ?>
