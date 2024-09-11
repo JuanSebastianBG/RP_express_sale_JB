@@ -99,9 +99,23 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             }
             return null;
 
+        }elseif($formulario == 'anadir_carrito'){
 
+            if (isset($_POST['anadir_al_carrito']) && isset($_POST['producto_id'])) {
+                $producto_id = intval($_POST['producto_id']);
+                anadirAlCarrito($producto_id);
+            }
 
+            $carrito = isset($_SESSION['carrito']) ? $_SESSION['carrito'] : [];
+            return $carrito;
 
+        }elseif($formulario == 'vaciar_carrito'){
+            if(isset($_POST['vaciar_carrito'])){
+                $_SESSION['carrito'] = [];
+
+                $carrito = $_SESSION['carrito'];
+                return $carrito;
+            }
         }else{
             echo "Error en el formulario";
         }

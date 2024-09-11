@@ -1,5 +1,6 @@
 <?php
 
+
     function login($usuario_alias, $usuario_contra) {
         require 'conexion.php';
 
@@ -164,4 +165,47 @@
         }
         return null;
     }
+
+    function busqueda($busqueda){
+        require 'conexion.php';
+
+        $sql = 'Select * from productos inner join usuarios on productos.usuario_id = usuarios.usuario_id 
+        where producto_nombre like :busqueda or usuario_alias like :busqueda';
+
+        $stmt = $conn->prepare($sql);
+        $busqueda_conatenada = "%$busqueda%";
+        $stmt->bindValue(':busqueda', $busqueda_conatenada);
+        $stmt->execute();
+
+        $productos_busqueda = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        if($productos_busqueda){
+            return $productos_busqueda;
+        }
+        return null;
+
+
+    }
+    function anadirAlCarrito($id){
+        require 'conexion.php';
+
+        if(!isset($_SESSION['carrito'])){
+            $_SESSION['carrito'] = [];
+        }
+
+        $sql = 'select * from productos where producto_id = :id';
+        $stmt = $conn->prepare($sql);
+        $stmt->bindvalue(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $producto = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if($producto){
+            $_SESSION['carrito'][] = $producto; 
+        }
+
+        
+
+    }
+
 ?>
