@@ -1,7 +1,6 @@
 <?php
 session_start();
-require 'conexion.php';
-require 'funciones.php';
+require '../models/pageModel.php';
 
 $usuario = null;
 
@@ -21,18 +20,18 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 $usuario = getInfo($usuario_id);
                 if($usuario){
                     $_SESSION['usuario'] = $usuario;
-                    header('Location: ../index.PaginaPrincipal.php');
+                    header('Location: ../views/principalPage.php');
                     exit;
                 }else{
                     echo "<script type='text/javascript'>
                             alert('Error al recolectar datos');
-                            window.location.href = '../index.login.php';
+                            window.location.href = '../index.php';
                         </script>";
                 }
             } else {
                 echo "<script type='text/javascript'>
                             alert('Error en el inicio de sesion');
-                            window.location.href = '../index.login.php';
+                            window.location.href = '../index.php';
                         </script>";
             }
         }elseif($formulario == 'registro_productos'){
@@ -50,7 +49,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             if($registrar_producto){
                 echo "<script type='text/javascript'>
                         alert('El producto se registro correctamente');
-                        window.location.href = '../index.registro_productos.php';
+                        window.location.href = '../views/Admin.php';
                     </script>";
             }
         }elseif($formulario == 'actualizar_producto'){
@@ -67,7 +66,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             if($actualizar_producto){
                 echo "<script type='text/javascript'>
                         alert('El producto se actualizo correctamente');
-                        window.location.href = '../index.registro_productos.php';
+                        window.location.href = '../views/principalPage.php';
                     </script>";
             }
 
@@ -79,7 +78,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             if($eliminar_producto){
                 echo "<script type='text/javascript'>
                         alert('El producto se elimino correctamente');
-                        window.location.href = '../index.registro_productos.php';
+                        window.location.href = '../views/Admin.php';
                     </script>";
             }
         }elseif($formulario == 'registrarUsuario'){
@@ -94,10 +93,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $registroUsuario = registrarUsuario($nombre, $apellidos, $email, $telefono, $alias, $pass, $direccion);
 
             if($registroUsuario){
-                header('Location: ../index.login.php');
+                header('Location: ../index.php');
                 return true;
             }
             return null;
+            header('Location: ../index.php');
 
         }elseif($formulario == 'anadir_carrito'){
 
@@ -120,8 +120,5 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             echo "Error en el formulario";
         }
 
-    }
-
-   
+    }  
 }
-?>

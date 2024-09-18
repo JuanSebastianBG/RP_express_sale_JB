@@ -16,7 +16,7 @@
         </div>
 
         <div class="w-full max-w-md">
-            <form action="controlador/procesos.php" method="post" class="bg-violet-600 p-8 rounded-lg shadow-lg">
+            <form action="controllers/pageController.php" method="post" class="bg-violet-600 p-8 rounded-lg shadow-lg">
                 <h2 class="text-2xl font-semibold text-white mb-4">Iniciar sesión</h2>
                 <input type="hidden" name="formulario" value="login">
                 <input name="usuario_alias" type="text" placeholder="Usuario Alias" class="input input-bordered input-info w-full mb-4">
@@ -27,7 +27,7 @@
             <button class="btn mt-4" onclick="my_modal_1.showModal()">Registrarse</button>
             <dialog id="my_modal_1" class="modal">
                 <div class="modal-box">
-                    <form action="controlador/procesos.php" method="post" class="flex flex-col gap-4">
+                    <form action="controllers/pageController.php" method="post" class="flex flex-col gap-4">
                         <input type="hidden" name="formulario" value="registrarUsuario" required>
                         <input type="text" name="nombre" placeholder="Nombre" class="input input-bordered input-info w-full" required>
                         <input type="text" name="apellidos" placeholder="Apellidos" class="input input-bordered input-info w-full" required>

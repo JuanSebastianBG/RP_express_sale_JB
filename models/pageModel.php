@@ -1,6 +1,5 @@
 <?php
 
-
     function login($usuario_alias, $usuario_contra) {
         require 'conexion.php';
 
@@ -58,7 +57,7 @@
         $stmt->bindValue(':categoria_id', $categoria_id);
     
     
-        $direccion = "../imagenes/";
+        $direccion = "../services/img/";
         $ruta = $direccion.basename($file['name']);
     
         if($_FILES['file']['size']>0){
@@ -73,7 +72,7 @@
     }
 
 
-    function obtenerProductos($usuario_id){
+    function obtenerProductosUsuario($usuario_id){
 
         require 'conexion.php';
 
@@ -102,7 +101,7 @@
         $stmt->bindValue(':categoria_id', $categoria_id);
     
 
-        $direccion = "../imagenes/";
+        $direccion = "../services/img/";
         $ruta = $direccion.basename($_FILES['file']['name']);
     
         if($_FILES['file']['size']>0){
@@ -132,7 +131,7 @@
 
     }
 
-    function obtenerProductosPP(){
+    function obtenerProductos(){
         require 'conexion.php';
 
         $sql = "SELECT * FROM productos";

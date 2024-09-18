@@ -1,7 +1,7 @@
 <?php 
-require_once 'controlador/procesos.php';
-require_once 'controlador/funciones.php'; 
-$productos = obtenerProductos($_SESSION['usuario']['usuario_id']);
+require_once '../controllers/pageController.php';
+require_once '../models/pageModel.php'; 
+$productos = obtenerProductos();
 ?>
 
 <!DOCTYPE html>
@@ -26,21 +26,26 @@ $productos = obtenerProductos($_SESSION['usuario']['usuario_id']);
 
         <div class="bg-gradient-to-r from-indigo-600 to-pink-500 text-white font-bold p-4 rounded-lg mb-4">
             Registrar productos
+            
         </div>
+        
 
         <div class="bg-white shadow-md rounded-lg p-6 mb-8">
             <!-- Modal Registrar Producto -->
             <button class="btn btn-primary" onclick="document.getElementById('modal_registrar').showModal()">Registrar producto</button>
+            <form action="../models/closeSession.php" method="post">
+                <input type="submit" value="Cerrar sesión" class="btn btn-secondary">
+            </form>
             <dialog id="modal_registrar" class="modal">
                 <div class="modal-box">
                     <form class="flex flex-col gap-4" action="controlador/procesos.php" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="formulario" value="registro_productos">
-                        <input type="text" name="nombre_producto" placeholder="Nombre del producto" class="input input-bordered input-primary w-full">
-                        <input type="text" name="descripcion_producto" placeholder="Descripción del producto" class="input input-bordered input-primary w-full">
-                        <input type="number" name="cantidad_producto" placeholder="Cantidad del producto" class="input input-bordered input-primary w-full">
-                        <input type="number" name="precio_producto" placeholder="Precio del producto" class="input input-bordered input-primary w-full">
-                        <input type="file" name="file" class="file-input file-input-bordered file-input-primary w-full">
-                        <input type="hidden" name="usuario_id_productos" value="<?= htmlspecialchars($_SESSION['usuario']['usuario_id']); ?>">
+                        <input type="text" name="nombre_producto" placeholder="Nombre del producto" class="input input-bordered input-primary w-full" required>
+                        <input type="text" name="descripcion_producto" placeholder="Descripción del producto" class="input input-bordered input-primary w-full" required>
+                        <input type="number" name="cantidad_producto" placeholder="Cantidad del producto" class="input input-bordered input-primary w-full" required>
+                        <input type="number" name="precio_producto" placeholder="Precio del producto" class="input input-bordered input-primary w-full" required>
+                        <input type="file" name="file" class="file-input file-input-bordered file-input-primary w-full" required>
+                        <input type="hidden" name="usuario_id_productos" value="<?= htmlspecialchars($_SESSION['usuario']['usuario_id']); ?>" required>
                         <select class="select select-bordered w-full" name="categoria_id">
                             <option value="1">Tecnología</option>
                             <option value="2">Comida</option>
@@ -77,7 +82,7 @@ $productos = obtenerProductos($_SESSION['usuario']['usuario_id']);
                         <td><?= htmlspecialchars($producto['producto_descripcion']) ?></td>
                         <td><?= htmlspecialchars($producto['producto_cantidad']) ?></td>
                         <td><?= htmlspecialchars($producto['producto_precio']) ?></td>
-                        <td><?= htmlspecialchars($producto['producto_imagen_url']) ?></td>
+                        <td><img src="<?= htmlspecialchars($producto['producto_imagen_url']) ?>" alt="Imagen no encontrada"></td>
                         <td><?= htmlspecialchars($producto['producto_estado']) ?></td>
                         <td><?= htmlspecialchars($producto['producto_fecha']) ?></td>
                         <td><?= htmlspecialchars($producto['usuario_id']) ?></td>
@@ -108,11 +113,11 @@ $productos = obtenerProductos($_SESSION['usuario']['usuario_id']);
                                     <form class="flex flex-col gap-4" action="controlador/procesos.php" method="post" enctype="multipart/form-data">
                                         <input type="hidden" name="formulario" value="actualizar_producto">
                                         <input type="hidden" name="producto_id" value="<?= htmlspecialchars($producto['producto_id']) ?>">
-                                        <input type="text" name="nombre_producto" placeholder="Nombre del producto" class="input input-bordered input-primary w-full">
-                                        <input type="text" name="descripcion_producto" placeholder="Descripción del producto" class="input input-bordered input-primary w-full">
-                                        <input type="number" name="cantidad_producto" placeholder="Cantidad del producto" class="input input-bordered input-primary w-full">
-                                        <input type="number" name="precio_producto" placeholder="Precio del producto" class="input input-bordered input-primary w-full">
-                                        <input type="file" name="file" class="file-input file-input-bordered file-input-primary w-full">
+                                        <input type="text" name="nombre_producto" placeholder="Nombre del producto" class="input input-bordered input-primary w-full" required>
+                                        <input type="text" name="descripcion_producto" placeholder="Descripción del producto" class="input input-bordered input-primary w-full" required>
+                                        <input type="number" name="cantidad_producto" placeholder="Cantidad del producto" class="input input-bordered input-primary w-full" required>
+                                        <input type="number" name="precio_producto" placeholder="Precio del producto" class="input input-bordered input-primary w-full" required>
+                                        <input type="file" name="file" class="file-input file-input-bordered file-input-primary w-full" required>
                                         <select class="select select-bordered w-full" name="categoria_id">
                                             <option value="1">Tecnología</option>
                                             <option value="2">Comida</option>
@@ -131,9 +136,7 @@ $productos = obtenerProductos($_SESSION['usuario']['usuario_id']);
             </table>
         </div>
 
-        <form action="controlador/cerrar_sesion.php" method="post">
-            <input type="submit" value="Cerrar sesión" class="btn btn-secondary">
-        </form>
+        
     </div>
 </body>
 </html>

@@ -1,10 +1,10 @@
 <?php
-require 'controlador/procesos.php';
-require_once 'controlador/funciones.php';
+require '../controllers/pageController.php';
+require_once '../models/pageModel.php';
 if (isset($_GET['search'])) {
     $productos = busqueda($_GET['search']);
 } else {
-    $productos = obtenerProductosPP();
+    $productos = obtenerProductos();
 }
 $carrito = isset($_SESSION['carrito']) ? $_SESSION['carrito'] : [];
 ?>
@@ -70,13 +70,13 @@ $carrito = isset($_SESSION['carrito']) ? $_SESSION['carrito'] : [];
                     </ul>
                 </div>
                 <li>
-                    <form action="controlador/cerrar_sesion.php" method="post">
+                    <form action="../models/closeSession.php" method="post">
                         <button type="submit" class="btn btn-outline btn-sm">Cerrar sesión</button>
                     </form>
                 </li>
                 <?php if (isset($_SESSION['usuario'])): ?>
                     <?php if ($_SESSION['usuario']['rol_id'] == 4): ?>
-                        <li><a href="index.registro_productos.php" class="btn btn-outline btn-sm">Admin</a></li>
+                        <li><a href="Admin.php" class="btn btn-outline btn-sm">Admin</a></li>
                     <?php elseif ($_SESSION['usuario']['rol_id'] == 3): ?>
                         <li><a href="domiciliario.php" class="btn btn-outline btn-sm">Domiciliario</a></li>
                     <?php elseif ($_SESSION['usuario']['rol_id'] == 2): ?>
